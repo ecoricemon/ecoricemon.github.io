@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-fg-color: #383FCC;
+  --secondary-fg-color: #5932E3;
+  --gradient-fg-first-color: var(--primary-fg-color);
+  --gradient-fg-second-color: #8330D9;
+}
+
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+[data-theme="dark"] {
+  /* TODO */
+}
+
+.title {
+  margin: 1rem;
+  font-size: min(10vw, 2.488rem);
+  background: linear-gradient(to right, var(--gradient-fg-first-color), var(--gradient-fg-second-color));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: #0000;
+}
+
+.together {
+  white-space: nowrap;
+}
+
+/* LARGE device */
+@media only screen and (min-width: 768px) {
+
+}
