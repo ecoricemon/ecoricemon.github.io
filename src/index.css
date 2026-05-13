@@ -1,0 +1,82 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --color-base: 25 23 36;
+  --color-surface: 31 29 46;
+  --color-overlay: 38 35 58;
+  --color-muted: 110 106 134;
+  --color-subtle: 144 140 170;
+  --color-text: 224 222 244;
+  --color-love: 235 111 146;
+  --color-gold: 246 193 119;
+  --color-rose: 235 188 186;
+  --color-pine: 49 116 143;
+  --color-foam: 156 207 216;
+  --color-iris: 196 167 231;
+  --color-shadow: 0 0 0;
+  --grid-line: rgba(224, 222, 244, 0.08);
+  --title-hover-gradient: linear-gradient(90deg, rgb(var(--color-foam)), rgb(var(--color-rose)) 52%, rgb(var(--color-gold)));
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --color-base: 250 244 237;
+  --color-surface: 255 250 243;
+  --color-overlay: 242 233 222;
+  --color-muted: 121 117 147;
+  --color-subtle: 87 82 121;
+  --color-text: 40 36 57;
+  --color-love: 180 99 122;
+  --color-gold: 234 157 52;
+  --color-rose: 215 130 126;
+  --color-pine: 40 105 131;
+  --color-foam: 86 148 159;
+  --color-iris: 144 122 169;
+  --color-shadow: 87 82 121;
+  --grid-line: rgba(87, 82, 121, 0.12);
+  --title-hover-gradient: linear-gradient(90deg, #4F46E5, #EC4899);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: rgb(var(--color-base));
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+span,
+button,
+a {
+  word-break: keep-all;
+}
+
+a,
+code,
+pre {
+  overflow-wrap: anywhere;
+}
+
+::selection {
+  background: rgba(235, 188, 186, 0.32);
+}
