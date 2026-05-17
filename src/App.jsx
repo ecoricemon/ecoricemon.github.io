@@ -28,6 +28,10 @@ import {
 } from "framer-motion";
 import { defaultLocale, locales } from "./content.js";
 
+const supportedLocales = ["ko", "en"];
+const fallbackLocale = defaultLocale;
+const localeStorageKey = "portfolio-locale";
+
 const fadeIn = {
   hidden: { opacity: 0, y: 34, scale: 0.98 },
   visible: (delay = 0) => ({
@@ -47,7 +51,27 @@ const iconMap = {
 };
 
 function getCopy(locale) {
-  return locales[locale] ?? locales[defaultLocale];
+  return locales[locale] ?? locales[fallbackLocale];
+}
+
+function normalizeLocale(locale) {
+  if (!locale) return fallbackLocale;
+
+  return locale.toLowerCase().startsWith("ko") ? "ko" : fallbackLocale;
+}
+
+function resolveInitialLocale() {
+  if (typeof window === "undefined") return fallbackLocale;
+
+  const savedLocale = window.localStorage.getItem(localeStorageKey);
+
+  if (supportedLocales.includes(savedLocale)) return savedLocale;
+
+  const browserLocales = Array.isArray(window.navigator.languages) && window.navigator.languages.length > 0
+    ? window.navigator.languages
+    : [window.navigator.language];
+
+  return normalizeLocale(browserLocales.find(Boolean));
 }
 
 function cn(...classes) {
@@ -202,7 +226,6 @@ function SolutionDiagram({ content, sectionLabel }) {
       <div className="relative grid gap-8 lg:grid-cols-[0.82fr_1.45fr] lg:items-center">
         <div className="relative pl-8">
           <div className="absolute bottom-3 left-2 top-3 w-px bg-gradient-to-b from-iris via-foam to-iris/30" />
-          <div className="absolute left-0 top-1 h-0 w-0 border-x-[9px] border-b-[15px] border-x-transparent border-b-iris" />
           <div className="space-y-9">
             {content.track.map((step) => (
               <div key={step.title} className="relative">
@@ -270,7 +293,7 @@ function SolutionDiagram({ content, sectionLabel }) {
 }
 
 export default function App() {
-  const [locale] = useState(defaultLocale);
+  const [locale, setLocale] = useState(resolveInitialLocale);
   const [theme, setTheme] = useState(() => {
     if (typeof window === "undefined") return "dark";
     const savedTheme = window.localStorage.getItem("portfolio-theme");
@@ -288,10 +311,19 @@ export default function App() {
   const isDark = theme === "dark";
   const copy = getCopy(locale);
 
+  function handleLocaleChange(nextLocale) {
+    setLocale(nextLocale);
+    window.localStorage.setItem(localeStorageKey, nextLocale);
+  }
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     window.localStorage.setItem("portfolio-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+  }, [locale]);
 
   return (
     <main
@@ -321,6 +353,29 @@ export default function App() {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden text-right sm:block">{copy.meta.headerSummary}</span>
+            <div
+              className="flex h-10 overflow-hidden border border-text/10 bg-surface/80"
+              role="group"
+              aria-label={copy.language.label}
+            >
+              {supportedLocales.map((item) => (
+                <button
+                  key={item}
+                  type="button"
+                  aria-label={item === "ko" ? copy.language.koLabel : copy.language.enLabel}
+                  aria-pressed={locale === item}
+                  onClick={() => handleLocaleChange(item)}
+                  className={cn(
+                    "min-w-11 px-3 text-xs font-bold uppercase tracking-[0.12em] transition",
+                    locale === item
+                      ? "bg-foam/15 text-foam"
+                      : "text-subtle hover:bg-foam/10 hover:text-foam",
+                  )}
+                >
+                  {item === "ko" ? "KO" : "EN"}
+                </button>
+              ))}
+            </div>
             <button
               type="button"
               aria-label={isDark ? copy.theme.lightLabel : copy.theme.darkLabel}

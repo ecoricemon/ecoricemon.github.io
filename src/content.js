@@ -1,6 +1,182 @@
-export const defaultLocale = "ko";
+export const defaultLocale = "en";
 
 export const locales = {
+  en: {
+    meta: {
+      archiveName: "Portfolio",
+      headerSummary: "Reliability / Scalability",
+      footer: "Problem-solving focused engineer",
+    },
+    theme: {
+      lightLabel: "Switch to light theme",
+      darkLabel: "Switch to dark theme",
+    },
+    language: {
+      label: "Switch language",
+      koLabel: "Switch to Korean",
+      enLabel: "Switch to English",
+    },
+    hero: {
+      eyebrow: "System Software Engineer",
+      title: "I design systems around reliability and scalability.",
+      message: "I solve complexity found in defense software practice with Rust and data-oriented design.",
+      blueprintTitle: "Navigation",
+    },
+    nav: [
+      { label: "Experience", href: "#foundation" },
+      { label: "Problems", href: "#problem" },
+      { label: "Approach", href: "#solution" },
+      { label: "Projects", href: "#projects" },
+    ],
+    sectionLabels: {
+      foundation: "The Foundation",
+      problem: "The Problem",
+      solution: "The Solution",
+    },
+    foundation: {
+      title: "Defense software development and reliability verification",
+      body: "I have developed and tested reliability-focused software in the defense industry.",
+    },
+    problem: {
+      title: "Core challenges that limit reliability and scalability",
+      body: "Through hands-on engineering work, I learned that system reliability and scalability are decisive factors in whether a service succeeds.",
+      categoryPrefix: "Category",
+      categories: [
+        {
+          title: "Reliability problems",
+          tone: "love",
+          items: [
+            {
+              label: "Memory",
+              questions: ["Does this pointer reference a valid address?", "Is this array index valid?", "Has heap memory been released correctly?"],
+            },
+            {
+              label: "Threads",
+              questions: ["Can a data race occur here?"],
+            },
+          ],
+        },
+        {
+          title: "Scalability problems",
+          tone: "gold",
+          items: [
+            {
+              label: "Features",
+              questions: ["Inheritance relationships grow more complex as maintenance continues.", "Complex inheritance hierarchies make refactoring difficult."],
+            },
+            {
+              label: "Performance",
+              questions: ["Moving from single-threaded execution to multithreading increases thread-management complexity."],
+            },
+          ],
+        },
+      ],
+    },
+    solution: {
+      title: "I am building a framework that combines language-level reliability with scalable execution.",
+      frameworkTitle: "Unified Framework",
+      frameworkSubtitle: "CPU + GPU unified execution framework (planned)",
+      rustTitle: "Rust",
+      rustSubtitle: "Memory and thread safety",
+      track: [
+        {
+          title: "Framework",
+          body: "Goal: build a framework that provides both reliability and scalability.",
+        },
+        {
+          title: "Scalability",
+          body: "A data-oriented approach separates data from behavior for feature scalability, while CPU/GPU utilization expands performance scalability.",
+        },
+        {
+          title: "Reliability",
+          body: "Rust provides memory and thread safety as the foundation.",
+        },
+      ],
+      branches: [
+        {
+          title: "Data-oriented multithreading",
+          icon: "cpu",
+          items: ["CPU parallel/asynchronous execution engine"],
+        },
+        {
+          title: "Rust to shader translation",
+          icon: "braces",
+          items: ["Rust semantic analysis library", "Logic inference library", "GPU compatibility checking library", "Shader source generation library (planned)"],
+          mutedItems: ["Shader source generation library (planned)"],
+        },
+      ],
+    },
+    projectLabels: {
+      badgePrefix: "Project",
+      why: "Why",
+      solution: "Solution",
+      github: "GitHub",
+      docs: "Docs.rs",
+    },
+    projects: [
+      {
+        letter: "A",
+        title: "CPU parallel/asynchronous execution engine",
+        name: "Data-oriented multithreading: my-ecs",
+        icon: "cpu",
+        accent: "foam",
+        reason: "Object-oriented programming can feel intuitive at first, but structures often become more complex as features expand.",
+        summary: "The data-oriented ECS pattern separates behavior from data and moves structural complexity into the execution engine.",
+        bullets: ["Data race prevention", "Work-stealing-based sync/async scheduling", "Interface covering both native workers and web workers"],
+        github: "https://github.com/ecoricemon/my-ecs",
+        docs: "https://docs.rs/my-ecs",
+        showDocs: true,
+      },
+      {
+        letter: "B",
+        title: "Rust semantic analysis library",
+        name: "Rust to shader translation: syn-sem",
+        icon: "braces",
+        accent: "iris",
+        reason: "Running one Rust source across CPU and GPU usually creates duplication because GPU shader code must be written separately.",
+        summary: "It performs name resolution, type inference, constant evaluation, and related analysis so CPU and GPU execution can originate from the same Rust source.",
+        bullets: ["Name resolution", "Type inference", "Const evaluation", "Monomorphization"],
+        github: "https://github.com/ecoricemon/syn-sem",
+        docs: "https://docs.rs/syn-sem",
+      },
+      {
+        letter: "C",
+        title: "Logic inference library",
+        name: "Rust to shader translation: logic-eval",
+        icon: "gitBranch",
+        accent: "gold",
+        reason: "Rust semantic analysis contains many complex logic problems.",
+        summary: "It uses logic inference to solve complex reasoning problems.",
+        bullets: ["Parsing", "Knowledge base", "Unification"],
+        github: "https://github.com/ecoricemon/logic-eval",
+        docs: "https://docs.rs/logic-eval",
+      },
+      {
+        letter: "D",
+        title: "GPU compatibility checking library",
+        name: "Rust to shader translation: my-wgsl",
+        icon: "databaseZap",
+        accent: "rose",
+        reason: "When CPU and GPU code share data, layout compatibility issues appear and developers often have to calculate layouts by hand.",
+        summary: "It reduces uncertainty in CPU-GPU shared data by verifying layout compatibility during constant evaluation.",
+        bullets: ["Layout checks during constant evaluation", "Removal of repetitive manual layout calculations"],
+        github: "https://github.com/ecoricemon/my-wgsl",
+        docs: "https://docs.rs/my-wgsl",
+      },
+      {
+        letter: "E",
+        title: "Automated CI/CD infrastructure",
+        name: "auto-kube",
+        icon: "network",
+        accent: "gold",
+        reason: "Kubernetes-based CI/CD has many moving parts and a high risk of manual configuration errors, so repeatable infrastructure setup matters.",
+        summary: "It describes Kubernetes-based infrastructure with Ansible to reduce manual setup mistakes.",
+        bullets: ["Harbor, Gitea, Jenkins, and Argo CD setup", "Cluster design with MetalLB, Cilium, and CoreDNS", "Repeatable infrastructure setup for on-premises environments"],
+        github: "https://github.com/ecoricemon/auto-kube",
+        docs: "https://docs.rs/auto-kube",
+      },
+    ],
+  },
   ko: {
     meta: {
       archiveName: "Portfolio",
@@ -10,6 +186,11 @@ export const locales = {
     theme: {
       lightLabel: "라이트 테마로 전환",
       darkLabel: "다크 테마로 전환",
+    },
+    language: {
+      label: "언어 전환",
+      koLabel: "한국어로 전환",
+      enLabel: "영어로 전환",
     },
     hero: {
       eyebrow: "System Software Engineer",
